@@ -11,7 +11,7 @@ const ProjectList = () => {
         <p className="pl-desc">
           Each project is a unique piece of development 🧩 Click on the picture
           to go to the website (Live Demo).
-        </p>22
+        </p>
       </div>
       <div className="pl-list">
         {projectsData.map((item) => {
