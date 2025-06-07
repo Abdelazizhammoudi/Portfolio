@@ -1,4 +1,5 @@
 .pl {
+    color: #fff;
     padding: 50px 100px;
     display: flex;
     flex-direction: column;
@@ -7,16 +8,19 @@
   }
   
   .pl-texts {
+    color: #fff;
     width: 65%;
   }
   
   .pl-title {
+    color: #fff;
     font-size: 50px;
     font-weight: 600;
     margin-bottom: 20px;
   }
   
   .pl-desc {
+    color: #fff;
     margin: 20px 0px;
   }
   

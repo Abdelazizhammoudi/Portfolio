@@ -2,53 +2,50 @@ import React, { useState, useEffect } from "react";
 import { Container, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Particle from "../Particle";
-import pdf from "../../Assets/CV_HAMMOUDI_Abdelaziz_2025_eng.pdf";
-import { AiOutlineDownload } from "react-icons/ai";
-import { Document, Page, pdfjs } from "react-pdf";
-import "react-pdf/dist/esm/Page/AnnotationLayer.css";
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+import { AiOutlineEye, AiOutlineDownload } from "react-icons/ai";
+import "./resume.css";
+
+// Use the public folder for the PDF
+const pdf = process.env.PUBLIC_URL + "/CV_HAMMOUDI_Abdelaziz_2025_eng.pdf";
 
 function ResumeNew() {
-  const [width, setWidth] = useState(1200);
+  const [, setWidth] = useState(window.innerWidth);
 
   useEffect(() => {
-    setWidth(window.innerWidth);
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
-    <div>
-      <Container fluid className="resume-section">
+    <div style={{ minHeight: "90vh", display: "flex", flexDirection: "column" }}>
+      <Container fluid className="resume-section" style={{ flex: 1, minHeight: "80vh" ,height: "100%" }}>
         <Particle />
-        <Row style={{ justifyContent: "center", position: "relative" }}>
+        <Row className="resume-btn-row" style={{ justifyContent: "center", position: "relative", marginBottom: 20 }}>
           <Button
             variant="primary"
             href={pdf}
             target="_blank"
-            style={{ maxWidth: "250px" }}
+            className="resume-btn"
+            style={{ maxWidth: "250px", marginRight: "10px" }}
           >
-            <AiOutlineDownload />
-            &nbsp;Download CV
+            <AiOutlineEye />
+            &nbsp;View CV
           </Button>
-        </Row>
-
-        <Row className="resume">
-          <Document file={pdf} className="d-flex justify-content-center">
-            <Page pageNumber={1} scale={width > 786 ? 1.7 : 0.6} />
-          </Document>
-        </Row>
-
-        <Row style={{ justifyContent: "center", position: "relative" }}>
           <Button
-            variant="primary"
+            variant="secondary"
             href={pdf}
-            target="_blank"
-            style={{ maxWidth: "250px" }}
+            download
+            className="resume-btn"
+            style={{ maxWidth: "250px", marginRight: "10px" }}
           >
             <AiOutlineDownload />
             &nbsp;Download CV
           </Button>
+
         </Row>
       </Container>
+  
     </div>
   );
 }
